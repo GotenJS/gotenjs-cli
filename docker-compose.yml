@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  goten-cli:
+    image: node:10.16
+    container_name: goten-cli
+    tty: true
+    volumes:
+      - ./:/goten-cli/
+      - ~/.ssh/:/root/.ssh/
+      - /etc/timezone:/etc/timezone
+    links:
+      - mongodb:mongodb
+      - mysql:mysql
+      - redis:redis
+    ports:
+      - 3001:3001
+      - 3801:3801
+      - 4200:4200
+    networks:
+      - goten-net
+    working_dir: /goten-cli/
+    command: bash
+  
+  mongodb:
+    image: mongo:latest
+    container_name: goten-mongo-test
+    tty: true
+    ports:
+      - 27017:27017
+    networks:
+      - goten-net
+  
+  mysql:
+    image: mysql:5.5
+    container_name: goten-mysql-test
+    tty: true
+    ports:
+      - 3307:3307
+    networks: 
+      - goten-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+  
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - goten-net
+
+networks:
+  goten-net:
+    driver: bridge
