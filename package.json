@@ -1,7 +1,6 @@
 {
-  "name": "goten-cli",
+  "name": "gotenjs-cli",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "bin": {
     "goten": "cli.js"
@@ -11,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "template": "node example/app.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Cys Informatica",
+  "license": "Apache-2.0",
   "dependencies": {
     "commander": "~2.15.1",
     "inquirer": "~5.2.0",
@@ -20,5 +19,17 @@
     "replace-in-file": "~3.4.4",
     "shelljs": "~0.8.2",
     "underscore": "~1.9.1"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GotenJS/gotenjs-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GotenJS/gotenjs-cli/issues"
+  },
+  "homepage": "https://github.com/GotenJS/gotenjs-cli#readme",
+  "description": ""
 }
