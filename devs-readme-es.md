@@ -15,7 +15,7 @@ Opcional:
 Para desarrollar y usar Goten recomendamos hacerlo con docker. Esto lo podemos hacer ejecutando:
 
 ```bash
-$ git clone https://github.com/GotenJS/gotenjs-cli.git
+$ git clone git@gitlab.cysonline.com.ar:goten/goten-cli.git
 $ cd goten-cli
 $ docker-compose up -d            // Este comando levanta los contenedores, pueden verse en el archivo docker-compose.yml.
 $ docker exec -it goten-cli bash  // Se ingresa dentro del contenedor 'goten-cli' con 'bash'.

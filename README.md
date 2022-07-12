@@ -2,260 +2,261 @@
 
 # Goten CLI
 
-**Índice**   
-1. [Instalación](#instalacion)  
-2. [Uso](#uso)  
+**Index**
+1. [Installation](#installation)  
+2. [Usage](#use)  
 	- 2.1 [Backend - Node](#node)  
-		- 2.1.1 [Crear proyecto](#crearProyectoNode)  
-		- 2.1.2 [Crear ABM](#crearABMNode)  
-		- 2.1.3 [Impactar migrations](#impactarMigrationsNode)  
-		- 2.1.2 [Crear nueva versión en la API](#versionarAPI)  
-	- 2.2 [Frontend - Angular y React](#frontend) 
+		- 2.1.1 [Create project](#createProjectNode)  
+		- 2.1.2 [Create ABM](#createABMNode)  
+		- 2.1.3 [Impact migrations](#impactMigrationsNode)  
+		- 2.1.2 [Create new version en la API](#versionAPI)  
+	- 2.2 [Frontend - Angular and React](#frontend) 
 		- 2.2.1 [Angular](#angular)
-			- 2.2.1.1[Crear proyecto](#crearProyectoAngular)  
-			- 2.2.2.2[Crear ABM](#crearABMAngular)
-			- 2.2.2.3[Asignar Favicon](#asignacionFaviconAngular)
+			- 2.2.1.1[Create proyecto](#createProyectoAngular)  
+			- 2.2.2.2[Create ABM](#createABMAngular)
+			- 2.2.2.3[Assigne Favicon](#assigFaviconAngular)
 		- 2.2.2 [React](#react)
-	    	- 2.2.2.1 [Crear proyecto](#crearProyectoReact)
-	    	- 2.2.2.2[Crear ABM](#crearABMReact)
-			- 2.2.2.3[Asignar Favicon](#asignacionFaviconReact)
-3. [Contribuir](#contribuir)
+	    	- 2.2.2.1 [Create proyecto](#createProyectoReact)
+	    	- 2.2.2.2[Create ABM](#createABMReact)
+			- 2.2.2.3[Assigne Favicon](#assigFaviconReact)
+3. [To contribute](#toContribute)
 
-## Instalación<a name="instalacion"></a>:
+## Installation<a name="installation"></a>:
 
-Chequear que se cuenta con permisos de lectura sobre el repositorio y que las claves ssh estén agregadas a gitlab, luego ejecutar:
+You need read access to this repository and your ssh keys must be added to your gitlab account. To install, run the following command:
 
 ```bash
 $ npm install -g git+ssh://git@gitlab.cysonline.com.ar:goten/goten-cli.git
-``` 
-En caso de no tener permiso de escritura sobre las libs de npm ejecutar lo siguiente
+```
+If you do not have write permissions on npm libs, execute the following:
 ```bash
 $ sudo -s
 $ cd /root/.ssh/
 $ ln -s ~/.ssh/id_rsa ./
 $ ln -s ~/.ssh/id_rsa.pub ./
 ```
-## Uso <a name="uso"></a>
+## Use <a name="use"></a>
 
-**Goten-cli** crear APIs en *node* de forma sencilla y aplicaciones de frontend en *angular7* y *react*.
+**Goten-CLI** creates APIs in *Node* in a simple way and frontend applications in *Angular 7* and *React*.
 
-## Backend - Node <a name="node"></a>
+### Backend - Node <a name="node"></a>
 
-#### Crear proyecto <a name="crearProyectoNode"></a>
+#### Create project <a name="createProjectNode"></a>
 
-Para crear una api debe ejecutarse el comando *new*:
+To create an API, use the command *new*:
 
 ```bash
 $ goten new <appName> *[options]*
 ```
-Este comando iniciará la aplicación en modo interactivo pidiendo los parámetros de configuración para la app.
-En caso de querer omitir el modo interactivo se debe especificar las *[options]*
+This command will run in interactive mode. If you wish to omit this step, you have to specify the *[options]*:
 
-options | value by default |características
+options | value by default |characteristics
 -- | -- | --
--p, --port \<port> | 3800 |puerto en el que escuchará la app 
--d, --database \<engine> | mongodb |motor de base de datos
--n, --dbname \<dbname> | *name of project* |nombre de la base de datos
--h, --dbhost \<dbhost> | 127.0.0.1 |host de la base de datos
--P, --dbport \<dbport> | 27017 |puerto de la base de datos
--u, --dbuser \<dbuser> | *none* |usuario de la base de datos
--w, --dbpass \<dbpass> | - |password de la base de datos (Sólo si se ingresó un usuario)
--y, --yes | - | valores por default
+-p, --port \<port> | 3800 | Port where the app will be listening
+-d, --database \<engine> | mongodb | Database engine
+-n, --dbname \<dbname> | *name of project* | Database name
+-h, --dbhost \<dbhost> | 127.0.0.1 | Database host
+-P, --dbport \<dbport> | 27017 | Database port
+-u, --dbuser \<dbuser> | *none* | Database user
+-w, --dbpass \<dbpass> | - | Database password (only required when specifying an user)
+-y, --yes | - | Default values
 
-Posee además el siguiente parámetro adicional:  
-***-V, --versioning*** Agrega el plugin de [goten-versioning](https://gitlab.cysonline.com.ar/goten/goten-versioning) para el manejar versionado en la API.
+This command also has the following optional parameters:
 
-**Importante:** Goten no creará la base de datos. Si se necesita incorporar una base de datos para hacer pruebas considerar:
-[devs-readme-es](devs-readme-es.md)
+***-V, --versioning*** Adds [goten-versioning](https://gitlab.cysonline.com.ar/goten/goten-versioning) to manage API's that are versioned
 
-#### Crear ABM<a name="crearABMNode"></a>
+**Important:** Goten will not create the database. If you need to add a database to test your app, consider:
+[devs-readme](devs-readme.md)
 
-Crea todas las capas referentes a una entidad, es decir, model, dao, service, assembler, controller, dto, filter, router.
+#### Create ABM<a name="createABMNode"></a>
+
+To create all the layers related to an entity, (model, dao, service, assembler, controller, dto, filter, router), use the command ***abm***
 
 ```bash
 $ goten abm <entityName> *[options]*
 ```
-Este comando iniciará en modo interactivo. En caso de querer omitir el modo interactivo se deben especificar las *[options]*
+This command will run in interactive mode. If you wish to omit this step, you have to specify the *[options]*:
 
-options | value by default |características
--- | -- | --
--p, --property \<propertyOption> | - | Agrega una property a la entidad. El formato de *propertyOption* es `propertyName:propertyType`. Ej: *goten new usuario -p nombre:String*. Las *propertyType* dependen del tipo de motor seleccionado.
--m, --migrate | - | (Este comando solo sirve con bases SQL) Al terminar de crear el modelo y sus migraciones las impacta en la base de datos.
--V, --versioning \<versionNumber> | *name of project* | (Este comando solo sirve si se esta utilizando goten-versioning) Por defecto los modelos se agregan a la última versión de la API, esta opción permite especificar en que versión desea crearse
+options | value by default | characteristics
+- | - | -
+-p, --property \ <propertyOption> | - | Add a property to the entity. The format of *propertyOption* is `propertyName: propertyType`. Ex: *goten new user -p name: String*. The *propertyType* depends on the type of engine selected.
+-m, --migrate | - | (This command only works with SQL databases) When you finish creating the model and its migrations, it impacts them in the database.
+-V, --versioning \ <versionNumber> | *name of project* | (This command only works if you are using goten-versioning) By default the models are added to the latest version of the API, this option allows you to specify in which version you want to create
 
-# Tipos de base de datos soportados
-- mongo: ver los tipos soportados por *mongoose* [aquí](http://mongoosejs.com/docs/schematypes.html);
-- mysql: ver los tipos soportados por *sequelize* [aquí](http://docs.sequelizejs.com/manual/tutorial/models-definition.html#data-types).
-	- Para crear relaciones del tipo *one to many* se debe agregar una property del tipo *hasMany(Class)*. Por ejemplo si se quiere crear una relación *one to many* entre *Cara* y *Ojo* es necesario agregar
+# Supported databases
+The supported databases depend on the type of database engine selected, in case you have selected mongo you can see the types supported by *mongoose* [here](http://mongoosejs.com/docs/schematypes.html); If you are using a relational engine you can see the types supported by *sequelize* [here](http://docs.sequelizejs.com/manual/tutorial/models-definition.html#data-types).
+	- To create relationships of type *one to many* you must add a property of type *hasMany (Class)*. For example if you want to create a *one to many* relationship between *Face* and *Eye* you need to add
+
 ```bash
-$ goten abm Cara -p "ojos: hasMany(Ojo)"
+$ goten abm Face -p "eye: hasMany(Eye)"
 ```
-
-#### Impactar migrations<a name="impactarMigrationsNode"></a>
-
-Para impactar las *migrations* en la base de datos se debe ejecutar el comando ***migrate***
+#### Impact migrations<a name="impactMigrationsNode"></a>
+To impact the *migrations* in the database, use **migrate**
 ```bash
 $ goten migrate   
 ```
-\* *Este comando solo funciona sobre motores SQL*
+\* *This command only works on SQL engines*
 
-#### Crear nueva versión en la API<a name="versionarAPI"></a>
+#### Create new version in the API<a name="versionarAPI"></a>
 
-Para crear una nueva versión de la API, se debe ejecutar el siguiente comando
+To create a new version of the API, the command must be executed
 ```bash
 $ goten version
 ```
-\* Este comando solo funciona si se esta utilizando el plugin goten-versioning
 
-## Frontend - Angular y React <a name="front"></a>
+\* This command only works if the goten-versioning plugin is being used
 
-## Angular<a name="angular"></a>
+## Frontend - Angular and React <a name="front"></a>
 
-#### Crear proyecto <a name="crearProyectoAngular"></a>
+### Angular<a name="angular"></a>
 
-Para crear una nueva SPA en angular debe ejecutarse el comando *new-angular*:
+#### Create project <a name="createProjectAngular"></a>
+
+To create a new SPA use ***new-angular***
+
 ```bash
 $ goten new-angular <appName> *[options]*
 ```
 
-Este comando iniciará la aplicación en modo interactivo, pidiendo un parámetro de configuración para la app:
-        - direccion de la api a consumir
+This command will start the application in interactive mode, asking for a configuration parameter for the app:
+        - Address of the api to consume
 
-En caso de querer omitir el modo interactivo se debe especificar las *[options]*
+If you want to omit the interactive mode you must specify the *[options]*
 
-options | características
+options | characteristics
 -- | --
--a, --api | especifica el host:port de donde consumirá la app.
--p, --primary | color por defecto es: azul
--d, --danger | color por defecto es: rojo
--s, --success | color por defecto es: verde
--i, --info | color por defecto es: cian
--w, --warning | color por defecto es: amarillo
--S, --secondary | color por defecto es: gris
+-a, --api | Specify the host: port where the app will consume.
+-p, --primary | Default color is: blue
+-d, --danger | Default color is: red
+-s, --success | Default color is: green
+-i, --info | Default color is: cyan
+-w, --warning | Default color is: yellow
+-S, --secondary | Default color is: gray
 
-Ejecutar la app esqueleto generada
+Run the generated app
 ```bash
 $ cd <appName>
 $ npm install
 $ npm start
 ```
-#### Crear ABM<a name="crearABMAngular"></a>
+#### Create ABM<a name="crearABMAngular"></a>
 
-Para crear todas las capas referentes a una entidad, es decir, dto, filter, response, service, routes, componentes y el tab corresponidiente, se debe ejecutar el comando
+To create all the layers referring to an entity (dto, filter, response, service, routes, components and the corresponding tab), use **abm-angular**.
 
 ```bash
 $ cd <appName>
 $ goten abm-angular <entityName> *[options]*
 ```
+When executing the previous one, an interactive mode is launched that allows you to add native types and custom types.
 
-Al ejecutar el anterior se lanza un modo interactivo que nos posibilita añadir tipos nativos y tipos custom.
+The native types are:
+- Boolean.
+- Number.
+- String.
+- Date.
 
-Los tipos nativos son:
-- Boolean
-- Number
-- String
+To add custom types in the interactive mode, *goten* will request the type of the property using the tag *Other*. This will offer the options *Array* and *Custom* (if you choose *Array* you must specify its type, allowing any native or *Custom* types).
+When choosing the type *Custom*, *goten* will request the name of the class that wants to be generated. Once all the properties of **ABM** have been specified, *goten* will ask the user to define properties for each *Custom* type entered by the user.
 
-Para añadir tipos custom en el modo interactivo *goten* solicitará el tipo de la property mediante la etiqueta *Other*, esto ofrecerá las opciones *Array* y *Custom* (si se elige *Array* se debera especificar el tipo del mismo, pudiendo ser cualquier tipo nativo o *Custom*). Al elegir el tipo *Custom* *goten* solicitará el nombre de la clase que quiere generarse. Una vez indicadas todas las properties del **ABM** *goten* pedirá que se indiquen las properties de todos los tipos *Custom* ingresados por el usuario.
+If you want to omit the interactive mode, you must specify the following parameters:
 
-En caso de querer omitir el modo interactivo se debe especificar los siguientes parámetros:
+options | parameter | characteristics
+- | - | -
+-p, --prop | **propOption** | Add a property with the specified format.
+-i, --prop | **internalModelOption** | Add a property with a customized type.
 
-options | parámetro | características
--- | -- | --
--p, --prop | **propOption** | agrega una property con el formato especificado.
--i, --prop | **internalModelOption** | agrega una property con un tipo customizado.
+**propOption** must respect the format `propertyName: propertyType`.
+**internalModelOption** must respect the format `customPropertyType.propertyName: propertyType`.
 
-**propOption** debe respetar el formato `propertyName:propertyType`.
-
-**internalModelOption** debe respetar el formato `customPropertyType.propertyName:propertyType`.
-
-Ejemplos
+Examples:
 ```bash
-$ goten abm-angular artista -p nombre:String -p disco:Disco -i Disco.nombre:String
+$ goten abm-angular artist -p name:String -p disc:Disc -i Disc.name:String
 ```
 ```bash
-$ goten abm-angular artista -p nombre:String -i Disco.nombre:String
+$ goten abm-angular artist -p name:String -i Disc.name:String
 ```
-En este último ejemplo es implícita la definición de *disco* para un artista al definir *Disco.nombre*
+In this last example, the definition of *disc* is implicit for an artist when defining *Disc.name* .
 
-#### Asignar Favicon <a name="asignacionFaviconAngular"></a>
+#### Assign Favicon <a name="assignFaviconAngular"> </a>
 
-Si se quiere asignar un favicon en el browser de la SPA generada, se debe ejecutar el siguiente comando:
+To assign a favicon in the browser of the SPA generated, must execute the following command:
 
-```bash
+```
+bash
 $ cd <appName>
-$ goten favicon <path_imagen> 
+$ goten favicon <path_imagen>
 ```
-Para que la ejecución sea exitosa se debe considerar que:
-- Tamaño: No supere 1000x1000 px.
-- Formatos aceptados: ICO, JPG, JPEG y  PNG. 
+For the execution to be successful, it must be considered that:
+- Size: Do not exceed 1000x1000 px.
+- Acceptable formats: ICO, JPG, JPEG and PNG.
 
-## React<a name="react"></a>
+### React<a name="react"></a>
 
-#### Crear proyecto <a name="crearProyectoReact"></a>
+#### Create project <a name="createProjectReact"></a>
 
-Para crear una nueva SPA debe ejecutarse el comando *new-react*:
+To create a new project with react, use the command *new-react*:
+
 ```bash
 $ goten new-react <appName> *[options]*
 ```
+This command will run in interactive mode. If you wish to omit this step, you have to specify the *[options]*:
 
-Este comando iniciará la aplicación en modo interactivo.En caso de querer omitirlo,se debe especificar las *[options]*
+options | characteristics
+- | -
+-a, --api | Modal properties
+-y, --yes | Url of the api defined by default ("localhost: 3800")
+-r, --redux | Architecture with redux
 
-options | características
--- | --
--a, --api | propiedades del modal
--y, --yes | url de la api definida por defecto ("localhost:3800")
--r, --redux | arquitectura con redux
+#### Create ABM <a name="createABMReact"></a>
 
-#### Crear ABM <a name="crearABMReact"></a>
-
-Si queremos agregar módulos, podemos hacerlo ejecutando el siguiente comando:
-
-```bash
-$ cd <appName>
-$ goten abm-react <nombre_abm> *[options]*
-```
-Al ejecutar el anterior se lanza un modo interactivo que nos posibilita añadir tipos nativos y tipos custom.
-
-Los tipos nativos son:
-- Boolean
-- Number
-- String
-- Date
-
-Para añadir tipos custom en el modo interactivo *goten* solicitará el tipo de la property mediante la etiqueta *Other*, esto ofrecerá las opciones *Array* y *Custom* (si se elige *Array* se debera especificar el tipo del mismo, pudiendo ser cualquier tipo nativo o *Custom*). Al elegir el tipo *Custom* *goten* solicitará el nombre de la clase que quiere generarse. Una vez indicadas todas las property del **ABM**, *goten* pedirá que se indiquen las de todos los tipos *Custom* ingresados por el usuario.
-
-En caso de querer omitir el modo interactivo se debe especificar los siguientes parámetros:
-
-options | parámetro | características
--- | -- | --
--p, --prop | **propOption** | agrega una property con el formato especificado.
--i, --prop | **internalModelOption** | agrega una property con un tipo customizado.
-
-**propOption** debe respetar el formato `propertyName:propertyType`.
-
-**internalModelOption** debe respetar el formato `customPropertyType.propertyName:propertyType`.
-
-Ejemplos
-```bash
-$ goten abm-react artista -p nombre:String -p disco:Disco -i Disco.nombre:String
-```
-```bash
-$ goten abm-react artista -p nombre:String -i Disco.nombre:String
-```
-En este último ejemplo es implícita la definición de *disco* para un artista al definir *Disco.nombre*
-
-#### Asignar de Favicon <a name="asignacionFaviconReact"></a>
-
-Si se quiere asignar un favicon en el browser de la SPA generada, se debe ejecutar el siguiente comando:
+To add modules,use the command :
 
 ```bash
 $ cd <appName>
-$ goten favicon <path_imagen> 
+$ goten abm-react <entityName> *[options]*
 ```
-Para que la ejecución sea exitosa se debe considerar que:
-- Tamaño: No supere 1000x1000 px.
-- Formatos aceptados: ICO, JPG, JPEG y  PNG.
+When executing the previous one, an interactive mode is launched that allows us to add native types and custom types.
 
-### Cómo contribuir al proyecto <a name="contribuir"></a>
+The native types are:
+- Boolean.
+- Number.
+- String.
+- Date.
 
-Ver [Contribuir](contributing-es.md)
+To add custom types in the interactive mode, *goten* will request the type of the property using the tag *Other*. This will offer the options *Array* and *Custom* (if you choose *Array* you must specify its type, allowing any native or *Custom* types).
+When choosing the type *Custom*, *goten* will request the name of the class that wants to be generated. Once all the properties of **ABM** have been specified, *goten* will ask the user to define properties for each *Custom* type entered by the user.
+
+If you want to omit the interactive mode, you must specify the following parameters:
+
+options | parameter | characteristics
+- | - | -
+-p, --prop | **propOption** | Add a property with the specified format.
+-i, --prop | **internalModelOption** | Add a property with a customized type.
+
+**propOption** must respect the format `propertyName: propertyType`.
+**internalModelOption** must respect the format `customPropertyType.propertyName: propertyType`.
+
+Examples:
+```bash
+$ goten abm-react artist -p name:String -p disc:Disc -i Disc.name:String
+```
+```bash
+$ goten abm-react artist -p name:String -i Disc.name:String
+```
+In this last example, the definition of *disco* is implicit for an artist when defining *Disc.name* .
+
+#### Assign Favicon <a name="assignFaviconReact"> </a>
+
+To assign a favicon in the browser of the SPA generated,must execute the following command:
+
+```
+bash
+$ cd <appName>
+$ goten favicon <path_imagen>
+```
+For the execution to be successful, it must be considered that:
+- Size: Do not exceed 1000x1000 px.
+- Acceptable formats: ICO, JPG, JPEG and PNG.
+
+### How to contribute to the project <a name="toContribute"> </a>
+See [contributing](contributing.md)
